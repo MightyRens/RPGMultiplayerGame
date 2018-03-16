@@ -1,3 +1,4 @@
+//do not change code below this line
 var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
@@ -8,3 +9,14 @@ app.get('/',function(req, res) {
 app.use('/client',express.static(__dirname + '/client'));
 
 serv.listen(2000);
+//do not change code above this line
+
+var io = require('socket.io')(serv,{});
+io.sockets.on('connection', function(socket) {
+  console.log('socket connection');
+
+  socket.on('happy',function(){
+    console.log('happy');
+  });
+
+});
